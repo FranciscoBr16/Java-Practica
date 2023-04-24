@@ -1,4 +1,4 @@
-package Paquete1;
+package Ejercicio1;
 
 // Mostrar por consola los 10 primeros números enteros y los 10 primeros números impares
 
