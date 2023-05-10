@@ -1,4 +1,4 @@
-package ejercicio5a;
+package ejercicio5b.ejercicio5;
 
 public class Vendedor extends Empleado {
 

@@ -1,5 +1,6 @@
-package ejercicio5a;
+package ejercicio5b.ejercicio5;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
@@ -12,14 +13,16 @@ public class Principal {
 		int dni=0, hsExtra, hsMes;
 		String nombre=null, apellido=null, email=null;
 		float sueldoBase=0, totalVentas,porcentaje;
-		Empleado[] empleados = new Empleado[20];
+		ArrayList <Empleado> empleados = new ArrayList<>();
 		int preg=0;
+		Empleado unEmpleado = new Empleado();
 		while(seguir && indice <2) {
 			
 			System.out.println("Quiere ingresar un  \n 1 - Administrativo  \n 2 - Vendedor");
 			opcion = Integer.parseInt(lector.nextLine());
 			
 			if (opcion ==1 || opcion == 2) {
+				
 				System.out.println("Ingrese DNI del empleado:");
 				dni = Integer.parseInt(lector.nextLine());
 				System.out.println("Ingrese Nombre del empleado:");
@@ -34,24 +37,26 @@ public class Principal {
 			
 			if (opcion == 1) {
 				
-				empleados[indice] = new Administrativo();
+				unEmpleado = new Administrativo();
 				System.out.println("Ingrese Horas extra del empleado Administrativo:");
 				hsExtra = Integer.parseInt(lector.nextLine());
 				System.out.println("Ingrese Horas Mes del empleado Administrativo:");
 				hsMes = Integer.parseInt(lector.nextLine());
-				((Administrativo)empleados[indice]).setValores(dni, nombre, apellido ,email ,sueldoBase, hsExtra, hsMes);
+				((Administrativo)unEmpleado).setValores(dni, nombre, apellido ,email ,sueldoBase, hsExtra, hsMes);
 				indice++; 
+				empleados.add(unEmpleado);
 			}
 			
 			if (opcion == 2) {
 				
-				empleados[indice] = new Vendedor();
+				unEmpleado = new Vendedor();
 				System.out.println("Ingrese Horas extra del Vendedor:");
 				porcentaje = Float.parseFloat(lector.nextLine());
 				System.out.println("Ingrese Horas Mes del Vendedor:");
 				totalVentas = Float.parseFloat(lector.nextLine());
-				((Vendedor)empleados[indice]).setValores(dni, nombre, apellido ,email ,sueldoBase, porcentaje, totalVentas);
+				((Vendedor)unEmpleado).setValores(dni, nombre, apellido ,email ,sueldoBase, porcentaje, totalVentas);
 				indice++;
+				empleados.add(unEmpleado);
 				
 				
 			}
@@ -67,7 +72,7 @@ public class Principal {
 			
 			for (int i=0; i<indice;i++) {
 				
-				System.out.println(empleados[i].mostrarDatos());
+				System.out.println(empleados.get(i).mostrarDatos());
 			}
 			
 			lector.close();
