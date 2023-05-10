@@ -29,7 +29,7 @@ public class Administrativo extends Empleado{
 	}
 	
 	public float getSueldo() {
-		return (float) (this.getSueldoBase() * ((this.getHsExtra() * 1.5)+this.getHsExtra()) / this.getHsMes());
+		return (float) (this.getSueldoBase() * ((this.getHsExtra() * 1.5)+this.getHsMes()) / this.getHsMes());
 		
 	}
 	
