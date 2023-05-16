@@ -38,5 +38,13 @@ public class Product {
 		this.shippingIcluded = shippingIcluded;
 	}
 	
+	public String toString() {
+		String envio; 
+		if (this.isShippingIcluded()) {
+			envio = "Envio Incluido";
+		} else envio = "El envio no está Incluido";
+		
+		return "[NOMBRE]: "+this.getName()+"\n[DESCRIPCION]: "+this.getDesctiption()+"\n[PRECIO]: "+this.getPrice()+"\n"+envio+"\n-----------------------------";  
+	}
 
 }
