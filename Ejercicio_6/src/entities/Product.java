@@ -4,9 +4,10 @@ public class Product {
 	
 	private int ID;
 	private String name;
-	private String desctiption;
+	private String description;
 	private double price;
-	private boolean shippingIcluded;
+	private int stock;
+	private boolean shippingIncluded;
 	public int getID() {
 		return ID;
 	}
@@ -19,11 +20,11 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDesctiption() {
-		return desctiption;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesctiption(String desctiption) {
-		this.desctiption = desctiption;
+	public void setDescription(String desctiption) {
+		this.description = desctiption;
 	}
 	public double getPrice() {
 		return price;
@@ -31,20 +32,26 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public boolean isShippingIcluded() {
-		return shippingIcluded;
+	public boolean isShippingIncluded() {
+		return shippingIncluded;
 	}
-	public void setShippingIcluded(boolean shippingIcluded) {
-		this.shippingIcluded = shippingIcluded;
+	public void setShippingIncluded(boolean shippingIcluded) {
+		this.shippingIncluded = shippingIcluded;
 	}
 	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	public String toString() {
 		String envio; 
-		if (this.isShippingIcluded()) {
+		if (this.isShippingIncluded()) {
 			envio = "Envio Incluido";
 		} else envio = "El envio no está Incluido";
 		
-		return "[NOMBRE]: "+this.getName()+"\n[DESCRIPCION]: "+this.getDesctiption()+"\n[PRECIO]: "+this.getPrice()+"\n"+envio+"\n-----------------------------";  
+		return "[NOMBRE]: "+this.getName()+"\n[DESCRIPCION]: "+this.getDescription()+ "\n[STOCK]: "+ this.getStock() +"\n[PRECIO]: $"+this.getPrice()+"\n"+envio+"\n-----------------------------";  
 	}
 
 }

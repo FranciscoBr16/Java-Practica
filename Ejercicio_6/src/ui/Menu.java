@@ -7,7 +7,7 @@ public class Menu {
 
 	public static void main(String[] args) {
 		
-			int op;
+			int op,id;
 			Scanner lector = new Scanner(System.in);
 			do {
 		 	System.out.println("Ingrese una Opcion \n [1] -- Listado de Productos \n [2] -- Busqueda \n [3] -- Nuevo Producto \n [4] -- Borrar Producto \n [5] -- Actualizar Producto \n [6] -- Salir \n");
@@ -33,13 +33,85 @@ public class Menu {
 					
 				}
 		 		break;
+		 		
 		 	case 2:
+		 		System.out.println("Ingrese ID a buscar:");
+		 		id = Integer.parseInt(lector.nextLine());
+		 		System.out.println(db.busqueda(id));
 		 		break;
+		 		
 		 	case 3:
+		 		Product pro = new Product();
+		 		System.out.println("Ingrese Nombre del producto a ingresar");
+		 		pro.setName(lector.nextLine());
+		 		System.out.println("Ingrese Descripcion del producto a ingresar");
+		 		pro.setDescription(lector.nextLine());
+		 		System.out.println("Ingrese Stock del producto a ingresar");
+		 		pro.setStock(Integer.parseInt(lector.nextLine()));
+		 		System.out.println("Ingrese Precio del producto a ingresar");
+		 		pro.setPrice(Double.parseDouble(lector.nextLine()));
+		 		System.out.println("Incluye el envio? \n [1] -- Si [2] -- No");
+		 		int b = Integer.parseInt(lector.nextLine());
+		 		if (b == 1 || b == 2) {
+		 			if (b==1) {
+		 				pro.setShippingIncluded(true);
+		 				db.newProduct(pro);
+		 			} else {pro.setShippingIncluded(false);
+		 			db.newProduct(pro);
+		 			}
+		 		} else System.out.println("Error al confirmar el envio del producto"); 
 		 		break;
 		 	case 4:
 		 		break;
 		 	case 5:
+		 		Product pro2 = new Product();
+		 		System.out.println("Ingrese ID a buscar:");
+		 		id = Integer.parseInt(lector.nextLine());
+		 		System.out.println(db.busqueda(id));
+		 		String att=null;
+		 		pro2.setID(id);
+		 		System.out.println("Que atributo desea modificar?\n[1]-- Nombre \n[2]-- Descripcion \n[3]-- Stock \n[4]-- Precio \n[5]Envio");
+		 		int op2 = Integer.parseInt(lector.nextLine());
+		 		switch (op2) {
+		 		case 1:
+		 			att = "name";
+		 			System.out.println("Ingrese el nuevo nombre para el producto");
+		 			String name = lector.nextLine();
+		 			pro2.setName(name);
+		 			break;
+		 		case 2:
+		 			att = "description";
+		 			System.out.println("Ingrese la nueva descripcion para el producto");
+		 			String desc = lector.nextLine();
+		 			pro2.setDescription(desc);
+		 			break;
+		 		case 3:
+		 			att = "stock";
+		 			System.out.println("Ingrese el nuevo stock para el producto");
+		 			int stk = Integer.parseInt(lector.nextLine());
+		 			pro2.setStock(stk);
+		 			break;
+		 		case 4:
+		 			att = "price";
+		 			System.out.println("Ingrese el nuevo nombre para el producto");
+		 			Double prc = Double.parseDouble(lector.nextLine());
+		 			pro2.setPrice(prc);
+		 			break;
+		 		case 5:
+		 			att= "shippingincluded";
+		 			if (pro2.isShippingIncluded()) {
+		 				pro2.setShippingIncluded(false);
+		 			} else pro2.setShippingIncluded(true);
+		 				
+		 			break;
+		 		default:
+		 			break;
+		 		
+		 		}
+
+		 		if(db.updateProduct(pro2,att) >0) {
+		 			System.out.println("Se modifico la tabla");
+		 		} else System.out.println("No es posible modificar la tabla");
 		 		break;
 		 	case 6:
 		 		break;
@@ -50,6 +122,7 @@ public class Menu {
 		 	
 		 	}
 		 	} while (op != 6);
+			lector.close();
 	}
 
 }
