@@ -7,19 +7,13 @@ public class Menu {
 
 	public static void main(String[] args) {
 		
+			Product pro = new Product();
 			int op,id;
 			Scanner lector = new Scanner(System.in);
 			do {
 		 	System.out.println("Ingrese una Opcion \n [1] -- Listado de Productos \n [2] -- Busqueda \n [3] -- Nuevo Producto \n [4] -- Borrar Producto \n [5] -- Actualizar Producto \n [6] -- Salir \n");
 		 	System.out.print("Su opcion:");
 		 	op = Integer.parseInt(lector.nextLine());
-		 	
-		 	/*
-		 	try {
-		 		Class.forName("com.mysql.cj.jdbc.Driver");
-		 	} catch (Exception e) {e.printStackTrace();
-		 	}		 	
-		 	*/
 		 	DbHandler db = new DbHandler();
 		 	
 		 	switch (op) {
@@ -41,7 +35,6 @@ public class Menu {
 		 		break;
 		 		
 		 	case 3:
-		 		Product pro = new Product();
 		 		System.out.println("Ingrese Nombre del producto a ingresar");
 		 		pro.setName(lector.nextLine());
 		 		System.out.println("Ingrese Descripcion del producto a ingresar");
@@ -62,6 +55,17 @@ public class Menu {
 		 		} else System.out.println("Error al confirmar el envio del producto"); 
 		 		break;
 		 	case 4:
+		 		System.out.println("Ingrese ID a buscar:");
+		 		id = Integer.parseInt(lector.nextLine());
+		 		System.out.println(db.busqueda(id));
+		 		System.out.println("Seguro que quieres eliminar este registro? \n [1]-- Si  [2]-- No");
+		 		int op1 = Integer.parseInt(lector.nextLine());
+		 		if (op1 == 1)
+		 		{
+		 			if (db.delete(db.busqueda(id))) {
+		 				System.out.println("El registro fue eliminado");
+		 			} else System.out.println("No fue posible eliminar el registro :(");
+		 		}
 		 		break;
 		 	case 5:
 		 		Product pro2 = new Product();
@@ -70,7 +74,7 @@ public class Menu {
 		 		System.out.println(db.busqueda(id));
 		 		String att=null;
 		 		pro2.setID(id);
-		 		System.out.println("Que atributo desea modificar?\n[1]-- Nombre \n[2]-- Descripcion \n[3]-- Stock \n[4]-- Precio \n[5]Envio");
+		 		System.out.println("Que atributo desea modificar?\n[1]-- Nombre \n[2]-- Descripcion \n[3]-- Stock \n[4]-- Precio \n[5]-- Envio");
 		 		int op2 = Integer.parseInt(lector.nextLine());
 		 		switch (op2) {
 		 		case 1:

@@ -92,15 +92,13 @@ public class DbHandler {
 			Product pro = new Product();
 			rs = stmt.executeQuery();
 			rs.next();
-			if (rs.getInt("idproducto")==id) {
 			pro.setID(rs.getInt("idproducto"));
 			pro.setDescription(rs.getString("description"));
 			pro.setStock(rs.getInt("stock"));
 			pro.setName(rs.getString("name"));
 			pro.setPrice(rs.getDouble("price"));
 			pro.setShippingIncluded(rs.getBoolean("shippingincluded"));
-			
-			} return pro;
+			return pro;
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -157,24 +155,25 @@ public class DbHandler {
 		ResultSet rs = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Update Product SET ? = ? where idproduct = ?");
-			pstmt.setString(1,at);
-			pstmt.setInt(3, prob.getID());
+			String consultaDinamica = "UPDATE Product SET `" + at + "` = ? WHERE idproducto = ?";
+			pstmt = conn.prepareStatement(consultaDinamica);
+			
+			pstmt.setInt(2, prob.getID());
 			switch (at) {
 			case "name":
-				pstmt.setString (2,prob.getName());
+				pstmt.setString (1,prob.getName());
 				break;
 			case "description":
-				pstmt.setString (2,prob.getDescription());
+				pstmt.setString (1,prob.getDescription());
 				break;
 			case "price":
-				pstmt.setDouble(2,prob.getPrice());
+				pstmt.setDouble(1,prob.getPrice());
 				break;
 			case "stock":
-				pstmt.setInt(2,prob.getStock());
+				pstmt.setInt(1,prob.getStock());
 				break;
 			case "shippingincluded":
-				pstmt.setBoolean(2, prob.isShippingIncluded());
+				pstmt.setBoolean(1, prob.isShippingIncluded());
 				break;
 			default:
 				break;
@@ -200,4 +199,30 @@ public class DbHandler {
 	
 	
 	}
+
+	public boolean delete(Product pro) {
+		PreparedStatement pstmt=null;
+		Connection conn;
+
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("DELETE from product WHERE idproducto =?");
+			pstmt.setInt(1, pro.getID());
+			return pstmt.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+			
+			
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+	}
+}
 }
