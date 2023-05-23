@@ -1,5 +1,6 @@
 package data;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -63,6 +64,11 @@ public class DbHandler {
 			pro.setName(rs.getString("name"));
 			pro.setPrice(rs.getDouble("price"));
 			pro.setShippingIncluded(rs.getBoolean("shippingincluded"));
+			Date fechaux = rs.getDate("disabledOn");
+			if (fechaux != null) {
+				pro.setDisabledOn(fechaux.toLocalDate());
+			} else pro.setDisabledOn(null);
+			
 			
 			productos.add(pro);
 				
@@ -175,6 +181,8 @@ public class DbHandler {
 			case "shippingincluded":
 				pstmt.setBoolean(1, prob.isShippingIncluded());
 				break;
+			case "disabledOn":
+				pstmt.setDate(1,java.sql.Date.valueOf(prob.getDisabledOn()));
 			default:
 				break;
 				

@@ -1,9 +1,15 @@
 package ui;
 import java.util.Scanner;
 import data.DbHandler;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+
 import entities.Product;
 public class Menu {
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public static void main(String[] args) {
 		
@@ -74,7 +80,7 @@ public class Menu {
 		 		System.out.println(db.busqueda(id));
 		 		String att=null;
 		 		pro2.setID(id);
-		 		System.out.println("Que atributo desea modificar?\n[1]-- Nombre \n[2]-- Descripcion \n[3]-- Stock \n[4]-- Precio \n[5]-- Envio");
+		 		System.out.println("Que atributo desea modificar?\n[1]-- Nombre \n[2]-- Descripcion \n[3]-- Stock \n[4]-- Precio \n[5]-- Envio \n[6]-- Fecha de deshabilitacion");
 		 		int op2 = Integer.parseInt(lector.nextLine());
 		 		switch (op2) {
 		 		case 1:
@@ -107,6 +113,19 @@ public class Menu {
 		 				pro2.setShippingIncluded(false);
 		 			} else pro2.setShippingIncluded(true);
 		 				
+		 			break;
+		 		case 6:
+		 			att = "disabledOn";
+		 			System.out.println("Ingrese la fecha en el que fue deshabilitado (dd/MM/yyyy)");
+		 			String aux = lector.nextLine();
+		 			
+		 			try {
+		 	            LocalDate fecha = LocalDate.parse(aux, formatter);
+		 	            pro2.setDisabledOn(fecha);
+		 	        } catch (DateTimeParseException e) {
+		 	            System.out.println("La fecha ingresada no cumple con el formato establecido (dd/MM/yyyy).");
+		 	        }
+		 			
 		 			break;
 		 		default:
 		 			break;
