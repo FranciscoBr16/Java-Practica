@@ -104,6 +104,10 @@ public class DbHandler {
 			pro.setName(rs.getString("name"));
 			pro.setPrice(rs.getDouble("price"));
 			pro.setShippingIncluded(rs.getBoolean("shippingincluded"));
+			Date fechaux = rs.getDate("disabledOn");
+			if (fechaux != null) {
+				pro.setDisabledOn(fechaux.toLocalDate());
+			} else pro.setDisabledOn(null);
 			return pro;
 			
 		}catch (SQLException e) {
