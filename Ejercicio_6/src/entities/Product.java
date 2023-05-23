@@ -72,7 +72,7 @@ public class Product {
 			envio = "Envio Incluido";
 		} else envio = "El envio no está Incluido";
 		
-		return "[ID]:"+ this.getID() +"\n"+ "[NOMBRE]: "+this.getName()+"\n[DESCRIPCION]: "+this.getDescription()+ "\n[STOCK]: "+ this.getStock() +"\n[PRECIO]: $"+this.getPrice()+"\n"+ "[DESHABILITACION]: "+ this.getDisabledOn(true)+"\n"+envio +"\n-----------------------------";  
+		return "[ID]:"+ this.getID() +"\n"+ "[NOMBRE]: "+this.getName()+"\n[DESCRIPCION]: "+this.getDescription()+ "\n[STOCK]: "+ this.getStock() +"\n[PRECIO]: $"+this.getPrice()+"\n"+ "[DESHABILITACION]: "+ this.getDisabledOn(true)+"\n"+envio +"\n------------------------------";  
 	}
 
 }
